@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DXApplication2.Data
 {
@@ -11,62 +10,60 @@ namespace DXApplication2.Data
 
             list.Add(new ClassData()
             {
-                ClassName = "IDiagramItem",
-                Type = ClassType.Interface
+                ClassName = "Supplier1",
+                Type = ClassType.Supplier
             });
 
             list.Add(new ClassData()
             {
-                ClassName = "IDiagramContentItem",
-                Type = ClassType.Interface
+                ClassName = "Supplier2",
+                Type = ClassType.Supplier
             });
 
             list.Add(new ClassData()
             {
-                ClassName = "DiagramItem",
-                Type = ClassType.AbstractClass
+                ClassName = "Warehouse1",
+                Type = ClassType.Warehouse
             });
 
             list.Add(new ClassData()
             {
-                ClassName = "DiagramConnector",
-                Type = ClassType.Class
+                ClassName = "Plant1",
+                Type = ClassType.Plant
             });
 
             list.Add(new ClassData()
             {
-                ClassName = "DiagramImage",
-                Type = ClassType.Class
+                ClassName = "Customer1",
+                Type = ClassType.Customer
             });
 
             list.Add(new ClassData()
             {
-                ClassName = "BaseDiagramContainer",
-                Type = ClassType.AbstractClass
+                ClassName = "Customer2",
+                Type = ClassType.Customer
             });
 
             list.Add(new ClassData()
             {
-                ClassName = "DiagramContentItem",
-                Type = ClassType.Class
+                ClassName = "Distributor1",
+                Type = ClassType.Distributor
+            });
+            list.Add(new ClassData()
+            {
+                ClassName = "Distributor2",
+                Type = ClassType.Distributor
+            });
+            list.Add(new ClassData()
+            {
+                ClassName = "Distributor3",
+                Type = ClassType.Distributor
             });
 
             list.Add(new ClassData()
             {
-                ClassName = "DiagramShape",
-                Type = ClassType.Class
-            });
-
-            list.Add(new ClassData()
-            {
-                ClassName = "DiagramDecoratorBase",
-                Type = ClassType.AbstractClass
-            });
-
-            list.Add(new ClassData()
-            {
-                ClassName = "DiagramContainerBase",
-                Type = ClassType.AbstractClass
+                ClassName = "Plant2",
+                Type = ClassType.Plant
             });
 
             return list;
@@ -78,87 +75,99 @@ namespace DXApplication2.Data
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "IDiagramItem",
-                ConnectedFrom = "DiagramItem"
+                ConnectedTo = "Warehouse1",
+                ConnectedFrom = "Supplier1"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "IDiagramItem",
-                ConnectedFrom = "DiagramConnector"
+                ConnectedTo = "Plant2",
+                ConnectedFrom = "Supplier1"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "IDiagramItem",
-                ConnectedFrom = "DiagramImage"
+                ConnectedTo = "Warehouse1",
+                ConnectedFrom = "Supplier2"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "IDiagramItem",
-                ConnectedFrom = "DiagramContentItem"
+                ConnectedTo = "Plant1",
+                ConnectedFrom = "Warehouse1"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "IDiagramItem",
-                ConnectedFrom = "DiagramShape"
+                ConnectedTo = "Plant2",
+                ConnectedFrom = "Warehouse1"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "IDiagramItem",
-                ConnectedFrom = "IDiagramContentItem"
+                ConnectedTo = "Distributor1",
+                ConnectedFrom = "Plant1"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "DiagramItem",
-                ConnectedFrom = "DiagramConnector"
+                ConnectedTo = "Customer1",
+                ConnectedFrom = "Plant2"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "DiagramItem",
-                ConnectedFrom = "DiagramImage"
+                ConnectedTo = "Distributor3",
+                ConnectedFrom = "Plant1"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "DiagramItem",
-                ConnectedFrom = "DiagramContentItem"
+                ConnectedTo = "Customer1",
+                ConnectedFrom = "Distributor1"
+            });
+            cList.Add(new ConnectionData()
+            {
+                ConnectedTo = "Customer1",
+                ConnectedFrom = "Distributor2"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "DiagramItem",
-                ConnectedFrom = "DiagramShape"
+                ConnectedTo = "Customer1",
+                ConnectedFrom = "Distributor3"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "DiagramItem",
-                ConnectedFrom = "BaseDiagramContainer"
+                ConnectedTo = "Customer2",
+                ConnectedFrom = "Distributor3"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "DiagramItem",
-                ConnectedFrom = "DiagramContentItem"
+                ConnectedTo = "Customer2",
+                ConnectedFrom = "Distributor2"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "BaseDiagramContainer",
-                ConnectedFrom = "DiagramDecoratorBase"
+                ConnectedTo = "Customer2",
+                ConnectedFrom = "Distributor1"
             });
 
             cList.Add(new ConnectionData()
             {
-                ConnectedTo = "BaseDiagramContainer",
-                ConnectedFrom = "DiagramContainerBase"
+                ConnectedTo = "Distributor1",
+                ConnectedFrom = "Plant2"
             });
+
+            cList.Add(new ConnectionData()
+            {
+                ConnectedTo = "Distributor2",
+                ConnectedFrom = "Plant2"
+            });
+
 
             return cList;
         }

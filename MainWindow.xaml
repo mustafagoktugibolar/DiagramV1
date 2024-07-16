@@ -6,22 +6,26 @@
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
-    xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram" 
+    xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
-    xmlns:viewmodel="clr-namespace:DXApplication2.ViewModel" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-    Title="MainWindow" Height="800" Width="1000">
+    Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid>
-        <dxdiag:DiagramControl ShowGrid="False" ShowRulers="False" ShowPageBreaks="False" CanvasSizeMode="Fill" >
+        <dxdiag:DiagramControl x:Name="diagramControl" ShowGrid="True" ShowRulers="False" ShowPageBreaks="True" 
+                               CanvasSizeMode="Fill" SugiyamaLayoutDirection="LeftToRight">
             <dxmvvm:Interaction.Behaviors>
                 <dxdiag:DiagramDataBindingBehavior ItemsSource="{Binding ClassSource}" ConnectorsSource="{Binding ConnectionSource}" 
                                                    ConnectorFromMember="ConnectedFrom" ConnectorToMember="ConnectedTo" 
-                                                   KeyMember="ClassName" LayoutKind="Tree" 
-                                                   ClearExistingItems="False" 
-                                                   GenerateItem="DiagramDataBindingBehavior_GenerateItem" 
-                                                   GenerateConnector="DiagramDataBindingBehavior_GenerateConnector">
+                                                   KeyMember="ClassName" LayoutKind="Sugiyama"
+                                                   ClearExistingItems="False">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand Command="{Binding GenerateItemCommand}" EventName="GenerateItem" PassEventArgsToCommand="True"/>
+                        <dxmvvm:EventToCommand Command="{Binding GenerateConnectorCommand}" EventName="GenerateConnector" PassEventArgsToCommand="True"/>
+                    </dxmvvm:Interaction.Behaviors>
+
                     <dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
                         <dxdiag:DiagramControl CanvasSizeMode="Fill" SelectedStencils="TemplateDesigner" ShowPageBreaks="false">
+                            <!-- Template for ClassShape -->
                             <dxdiag:DiagramContainer Anchors="Left, Top" Background="#FFCEE1F2" 
                                                      CanCopyWithoutParent="True" ConnectionPoints="0.5,0 1,0.5 0.5,1 0,0.5" 
                                                      CanAddItems="False" DragMode="ByAnyPoint" Height="78" 
@@ -37,17 +41,19 @@
                                                      ShowHeader="False" StrokeDashArray="5 3" 
                                                      ThemeStyleId="ShapeId.Focused1" 
                                                      TemplateName="ClassShape" Width="200">
+
                                 <dxdiag:DiagramShape Anchors="Left, Top" Angle="0" Background="Transparent" 
                                                      CanAttachConnectorBeginPoint="False" CanResize="False" 
                                                      CanEdit="False" CanCopyWithoutParent="False" CanChangeParent="False"
                                                      CanMove="False" CanAttachConnectorEndPoint="False" CanSelect="False"
                                                      CanDeleteWithoutParent="False" CanRotate="False" ForegroundId="Black" 
                                                      FontWeight="Bold" FontFamily="Arial" Height="25" Position="11,10" 
-                                                     StrokeThickness="0" ThemeStyleId="Variant2" TextAlignment="Left" Width="176">
+                                                     StrokeThickness="0" ThemeStyleId="Variant1"  TextAlignment="Left" Width="176">
                                     <dxdiag:DiagramShape.Bindings>
-                                        <dxdiag:DiagramBinding Expression="ClassName" PropertyName="Content"/>
+                                        <dxdiag:DiagramBinding Expression="ClassName" PropertyName="Content" />
                                     </dxdiag:DiagramShape.Bindings>
                                 </dxdiag:DiagramShape>
+
                                 <dxdiag:DiagramShape Anchors="Left, Top" Angle="0" Background="Transparent" 
                                                      CanAttachConnectorBeginPoint="False" CanResize="False" 
                                                      CanEdit="False" CanCopyWithoutParent="False" CanChangeParent="False" 
@@ -61,10 +67,8 @@
                                     </dxdiag:DiagramShape.Bindings>
                                 </dxdiag:DiagramShape>
                             </dxdiag:DiagramContainer>
-                            <dxdiag:DiagramConnector BeginPoint="300,164" CanDragBeginPoint="False" CanChangeRoute="False"
-                                                     CanDragEndPoint="False" EndArrow="ClosedASMEArrow" 
-                                                     EndArrowSize="10,10" EndPoint="390,254" Points="(Empty)" 
-                                                     StrokeId="Black" TemplateName="ClassConnector" Type="Straight"/>
+
+                            <!-- Template for InterfaceShape -->
                             <dxdiag:DiagramContainer Anchors="Left, Top" BackgroundId="Dark_2" CanCopyWithoutParent="True"
                                                      ConnectionPoints="0.5,0 1,0.5 0.5,1 0,0.5" CanAddItems="False"
                                                      DragMode="ByAnyPoint" Height="78" ItemsCanChangeParent="False" 
@@ -78,6 +82,7 @@
                                                      Shape="StandardContainers.Alternating" ShowHeader="False"
                                                      StrokeDashArray="5 3" ThemeStyleId="ShapeId.Focused1"
                                                      TemplateName="InterfaceShape" Width="200">
+
                                 <dxdiag:DiagramShape Anchors="Left, Top" Angle="0" Background="Transparent" 
                                                      CanAttachConnectorBeginPoint="False" CanResize="False" 
                                                      CanEdit="False" CanCopyWithoutParent="False" 
@@ -106,6 +111,13 @@
                                     </dxdiag:DiagramShape.Bindings>
                                 </dxdiag:DiagramShape>
                             </dxdiag:DiagramContainer>
+
+                            <!-- Connectors -->
+                            <dxdiag:DiagramConnector BeginPoint="300,164" CanDragBeginPoint="False" CanChangeRoute="False"
+                                                     CanDragEndPoint="False" EndArrow="ClosedASMEArrow" 
+                                                     EndArrowSize="10,10" EndPoint="390,254" Points="(Empty)" 
+                                                     StrokeId="Black" TemplateName="ClassConnector" Type="Straight"/>
+
                             <dxdiag:DiagramConnector BeginPoint="500,175" CanDragBeginPoint="False" CanChangeRoute="False" 
                                                      CanDragEndPoint="False" EndArrow="Filled90" EndArrowSize="10,10"
                                                      EndPoint="590,265" Points="(Empty)" StrokeId="Black" 

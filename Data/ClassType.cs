@@ -3,8 +3,10 @@ namespace DXApplication2.Data
 {
     public enum ClassType
     {
-        Class,
-        Interface,
-        AbstractClass,
+        Supplier,
+        Warehouse,
+        Plant,
+        Customer,
+        Distributor
     }
 }
